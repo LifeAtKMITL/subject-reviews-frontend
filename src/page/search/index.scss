@@ -1,0 +1,10 @@
+$bg :#17181A;
+
+.searchpage__container{
+    background-color: $bg;
+    height: 100vh;
+    .post__searchpage{
+        background-color: $bg;
+        margin-top: 15px;
+    }
+}

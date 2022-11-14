@@ -1,0 +1,21 @@
+.profile_container{
+    background-color: #202123;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.profile_icon{
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.profile_name{
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding-left: 20px;
+}

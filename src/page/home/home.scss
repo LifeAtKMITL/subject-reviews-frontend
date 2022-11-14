@@ -1,0 +1,23 @@
+$bg :#17181A;
+.home_bg{
+    background-color: $bg;
+    height: 100vh;
+    .feature__container{
+        display: flex;
+        padding: 15px 2rem 0 2rem;
+        justify-content: space-between;
+
+        .search__test{
+            position: absolute;
+            right: 2rem;
+            height: 2rem;
+        }
+    }
+
+    .m_blogpost{
+        background-color: $bg;
+        margin-top: 15px;
+    }
+}
+
+

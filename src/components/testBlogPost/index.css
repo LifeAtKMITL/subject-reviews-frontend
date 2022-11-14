@@ -1,0 +1,99 @@
+.bg_all{
+    background-color: #17181A;
+    }
+  
+  .review_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .review_post{
+    width: 300px;
+    padding: 16px;
+    background-color:#202123;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .review_reviewer{
+    display: flex;
+    /* align-items: center; */
+    margin-bottom: 15px
+  }
+  
+  .review_img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  .review_font_subject{
+    font-size: 12px;
+    font-weight: bold;
+    color:#48C7E5;
+    padding-bottom: 2px;
+  }
+  .review_color_bookmark{
+    color: #C4A33F;
+    font-size: 20px !important;
+  }
+  .review_font_description{
+    color: white;
+    font-size: 12px;
+    opacity: 87%;
+  }
+  .review_font_name{
+    color: white;
+    font-size: 14px;
+    opacity: 87%;
+    font-weight: bold;
+  }
+  .review_font_date{
+    color: #C1CBDC;
+    font-size: 10px;
+  }
+  .review_name_date{
+    margin-right: 15px;
+  }
+  .review_box_like{
+    margin-left: auto; 
+    margin-right: 0;
+  }
+  .bg_review{
+    background-color: #17181A;
+  }
+  .review_btn_readmore{
+    all: unset;
+    cursor: pointer;
+    opacity: 87%;
+    color: white;
+  }
+  .review_btn_bookmark{
+    all: unset;
+    cursor: pointer;
+  }
+  .review_btn_like{
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .review_numlikeon{
+    padding-left: 5px;
+    color: #48C7E5;
+    font-size: 12px;
+  }
+  .review_numlikeoff{
+    padding-left: 5px;
+    color: white;
+    opacity: 87%;
+    font-size: 12px;
+  }
+  .review_btn_likeoff{
+    color: white;
+    opacity: 87%;
+    font-size: 20px !important;
+  }
+  .review_btn_likeon{
+    color: #48C7E5;
+    font-size: 20px !important;
+  }

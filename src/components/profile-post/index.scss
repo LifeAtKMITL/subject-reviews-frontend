@@ -1,0 +1,77 @@
+$bg-button: #232528;
+$txt-clr: #FFFFFF;
+
+.Post__container{
+    padding: 20px;
+    width: 340px;
+    height: 60%;
+    background-color: $bg-button;
+    margin: 0 auto;
+    border-radius: 15px;
+    
+    .header__postProfile{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left__header{
+            display: flex;
+            
+            .Add__icon{
+                color: #C4A33F;
+                font-size: 1.7rem !important;
+            }
+
+            .txt__post{
+                color: $txt-clr;
+                font-weight: 600;
+                font-size: 16PX;
+            }
+        }
+
+        .right__header{
+            display: flex;
+            .delete__container{
+                padding: 0 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+                color: $txt-clr;
+                background-color: $bg-button;
+
+                .delete__icon{
+                    font-size: 20px !important;
+                }
+            }
+            .all__button{
+                // display: flex;
+                // font-size: 15px;
+                // justify-content: center;
+                // align-items: center;
+                // margin-left: 1rem;
+                // border-radius: 5px;
+                // padding: 0px 10px;
+                // color: $txt-clr;
+                // background-color: $bg-button;
+                all: unset;
+                cursor: pointer;
+                background-color:#202123;
+                color: white;
+                width: 45px;
+                padding: 2px;
+                font-size: 15px;
+                border-radius: 8px;
+                text-align: center;
+            }
+        }
+
+    }
+
+    .reviewpost__blog{
+        margin-top: 15px;
+        // transition: 4s;
+        
+    }
+    
+}

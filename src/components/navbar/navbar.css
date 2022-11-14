@@ -1,0 +1,17 @@
+.navbar-bg{
+    display: flex;
+    width: 100%;
+    background-color: #202123;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 32px 0px 32px;
+}
+.nav_icon{
+    width:40px;
+}
+.nav_user{
+    width:40px;
+    height: 40px;
+    /* border: 1px solid white ; */
+    border-radius: 50%;
+}

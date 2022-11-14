@@ -1,0 +1,70 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'sukhumvit';
+  src: url('assets/fonts/sukhumvit-set/SukhumvitSet-Text.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'sukhumvit-semibold';
+  src: url('assets/fonts/sukhumvit-set/SukhumvitSet-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'sukhumvit-bold';
+  src: url('assets/fonts/sukhumvit-set/SukhumvitSet-Bold.ttf') format('truetype');
+}
+
+/* Default Setup */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'sukhumvit', sans-serif;
+}
+
+/* TextField */
+
+.form .MuiTextField-root,
+.MuiOutlinedInput-root {
+  border: 0px;
+  border-radius: 10px !important;
+}
+
+.form .MuiInputBase-root {
+  background-color: #17181A;
+}
+
+.form .MuiTextField-root input {
+  color: #fff;
+  padding: 0.4rem 0 !important;
+  padding-left: 1rem !important;
+  font-family: 'sukhumvit' !important;
+  text-transform: capitalize;
+}
+
+.form .MuiOutlinedInput-root.Mui-focused fieldset {
+  border: none;
+}
+
+.form .MuiSvgIcon-root {
+  color: white;
+}
+
+/* Autocomplete Dropdown */
+
+.MuiPaper-root {
+  margin-top: 0.6rem;
+  border-radius: 10px;
+  background-color: #141519 ; 
+  border-radius: 20px !important;
+}
+
+.MuiAutocomplete-listbox {
+  font-family: 'sukhumvit';
+  background-color: #141519 ;
+  color: white ;
+  border-radius: 20px;
+  text-transform: capitalize;
+}

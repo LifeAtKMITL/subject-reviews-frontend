@@ -1,0 +1,14 @@
+.search__container{
+    width: 3rem;
+    height: 2rem;
+    padding: 0.5rem 1.5rem;
+    background-color: #232528;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.icon__search{
+    font-size: 1.3rem !important;
+}

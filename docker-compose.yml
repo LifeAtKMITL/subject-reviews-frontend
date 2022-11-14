@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  app-dev:
+    image: kmitl-subject-review
+    build: .
+    restart: always
+    ports:
+      - "4001:80"

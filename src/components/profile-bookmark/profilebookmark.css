@@ -1,0 +1,43 @@
+.bookmark_container{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    margin-bottom: 25px;
+}
+.bookmark_box{
+    width: 340px;
+    height: 60%;
+    background-color: #232528;
+    border-radius: 15px;
+    padding: 20px;
+}
+.bookmark_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.bookmark_head{
+    display: flex;
+    align-items: center;
+}
+.bookmark_head div{
+    padding-left: 5px;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+.bookmark_icon{
+    color: #C4A33F;
+}
+.bookmark_all{
+    all: unset;
+    cursor: pointer;
+    background-color:#202123;
+    color: white;
+    width: 45px;
+    padding: 2px;
+    font-size: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
