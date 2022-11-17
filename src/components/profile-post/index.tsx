@@ -76,10 +76,11 @@ const ProfilePost = () => {
               let tempLK1 = dataLike.find(
                 (element) => element.reviewId === e._id
               );
+              const newDatePost = new Date(e.date);
               return (
                 <BlogPost
                   reviewer_name={e.username}
-                  date={e.date}
+                  date={newDatePost.toUTCString()}
                   description={e.textSubjectReview}
                   subject_id_name={e.subjectId + " " + e.subjectName}
                   reviewer_image={e.imagePath}

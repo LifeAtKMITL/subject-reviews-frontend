@@ -38,9 +38,11 @@ const ProfileBookmark = () => {
   };
   if (chck) {
     data.map((e) => {
+      const newDate0 = new Date(e.date);
       let tempBK = dataBookmark.find((element) => element.reviewId === e._id);
       if (tempBK && chck) {
         r = e;
+        r.date = newDate0.toUTCString();
         chck = false;
       }
     });
@@ -70,11 +72,12 @@ const ProfileBookmark = () => {
                 let tempLK1 = dataLike.find(
                   (element) => element.reviewId === e._id
                 );
+                const newDate = new Date(e.date);
                 return (
                   tempBK1 && (
                     <BolgPostBookmark
                       reviewer_name={e.username}
-                      date={e.date}
+                      date={newDate.toUTCString()}
                       description={e.textSubjectReview}
                       subject_id_name={e.subjectId + " " + e.subjectName}
                       reviewer_image={e.imagePath}

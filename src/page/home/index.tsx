@@ -115,10 +115,11 @@ const Home = () => {
         {r.map((e) => {
           // let tempBK = dataBookmark.find((element) => element.reviewId === e._id);
           // let tempLK = dataLike.find((element) => element.reviewId === e._id);
+          const newDate = new Date(e.date); //-------------------------------
           return (
             <BlogPost
               reviewer_name={e.username}
-              date={e.date}
+              date={newDate.toUTCString()}
               description={e.textSubjectReview}
               subject_id_name={e.subjectId + " " + e.subjectName}
               reviewer_image={e.imagePath}
