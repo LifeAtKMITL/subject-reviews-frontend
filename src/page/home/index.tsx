@@ -31,7 +31,7 @@ const Home = () => {
     const getPost = async () => {
       const { data: res } = await axios.get(apiAllPost);
       const { data: response } = await axios.get(apiUser);
-      setData(res);
+      setData(res.reverse());
       setDataBookmark(response.bookmarkedReviews);
       setDataLike(response.likedReviews);
     };
@@ -48,7 +48,7 @@ const Home = () => {
     );
 
   const handleButtonDropdown = () => {
-    setIsActive(true);
+    setIsActive(!isActive);
   };
   const RemoveSelectedDropdown = (e: string) => {
     const temp = selected.filter((list) => list != e);
@@ -112,7 +112,7 @@ const Home = () => {
         </div>
       </div>
       <div className="m_blogpost">
-        {r.reverse().map((e) => {
+        {r.map((e) => {
           // let tempBK = dataBookmark.find((element) => element.reviewId === e._id);
           // let tempLK = dataLike.find((element) => element.reviewId === e._id);
           const newDate = new Date(e.date); //-------------------------------
