@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { Global } from '@emotion/react';
-import { styled } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
-import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import AddIcon from '@mui/icons-material/Add';
-import './btnPost.css';
-import PostForm from 'components/post-form';
-import axios from 'utils/axios';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import Autocomplete from '@mui/material/Autocomplete';
-import { Value } from 'sass';
+import React, { useEffect, useState } from "react";
+import { Global } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
+import Box from "@mui/material/Box";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import AddIcon from "@mui/icons-material/Add";
+import "./btnPost.css";
+import PostForm from "components/post-form";
+import axios from "utils/axios";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Autocomplete from "@mui/material/Autocomplete";
+import { Value } from "sass";
 
 interface ISuggestionDrawer {
   window?: () => Window;
 }
 
-const Root = styled('div')(() => ({
-  height: '100%',
+const Root = styled("div")(() => ({
+  height: "100%",
   backgroundColor: grey[100],
 }));
 
 const StyledBox = styled(Box)(() => ({
-  backgroundColor: '#232528',
+  backgroundColor: "#232528",
 }));
 
 const Puller = styled(Box)(() => ({
@@ -31,10 +31,10 @@ const Puller = styled(Box)(() => ({
   height: 6,
   backgroundColor: grey[300],
   borderRadius: 3,
-  position: 'absolute',
+  position: "absolute",
   top: 15,
-  left: '50%',
-  transform: 'translateX(-50%)',
+  left: "50%",
+  transform: "translateX(-50%)",
 }));
 
 const drawerBleeding = 56;
@@ -46,37 +46,43 @@ const SubjectDrawer = ({ window }: ISuggestionDrawer) => {
     setOpen(newOpen);
   };
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-  const [subjectId, setSubjectId] = useState('');
-  const [textSubjectReview, setTextSubjectReview] = useState('');
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+  const [subjectId, setSubjectId] = useState("");
+  const [textSubjectReview, setTextSubjectReview] = useState("");
   const handlePost = (e: React.FormEvent<HTMLFormElement>) => {
-    if (subjectId != '' && textSubjectReview != '') {
+    if (subjectId.trim() != "" && textSubjectReview.trim() != "") {
       try {
         e.preventDefault();
         axios
-          .post('/blogreview', { subjectId, textSubjectReview })
-          .then((res) => console.log('Posting data', res))
+          .post("/blogreview", { subjectId, textSubjectReview })
+          .then((res) => console.log("Posting data", res))
           .catch((err) => console.log(err));
-        alert('Post Completed');
+        alert("Post สำเร็จ");
+        setSubjectId("");
+        setTextSubjectReview("");
         setOpen(false);
       } catch (error) {
-        alert('Subject Id not found.');
+        alert("Subject Id not found.");
         return null;
       }
-    } else if (subjectId == '') {
+    } else if (subjectId.trim() == "") {
       e.preventDefault();
-      alert('โปรดพิมพ์รหัสวิชาให้ถูกต้อง');
-    } else if (textSubjectReview == '') {
+      alert("โปรดพิมพ์รหัสวิชาให้ถูกต้อง");
+    } else if (
+      textSubjectReview.length == 0 ||
+      textSubjectReview.trim() == ""
+    ) {
       e.preventDefault();
-      alert('โปรดพิมพ์ข้อความ');
+      alert("โปรดพิมพ์ข้อความ");
     } else {
       e.preventDefault();
-      alert('โปรดพิมพ์รหัสวิชาและข้อความ');
+      alert("โปรดพิมพ์รหัสวิชาและข้อความ");
     }
   };
 
   const [subject, setSubject] = React.useState<any[]>([]);
-  const apiBookmark = '/subject';
+  const apiBookmark = "/subject/gened";
   React.useEffect(() => {
     const getSubject = async () => {
       const { data: res } = await axios.get(apiBookmark);
@@ -90,22 +96,22 @@ const SubjectDrawer = ({ window }: ISuggestionDrawer) => {
     <Root>
       <Global
         styles={{
-          '.MuiDrawer-root > .MuiPaper-root': {
+          ".MuiDrawer-root > .MuiPaper-root": {
             height: `calc(75% - ${drawerBleeding}px)`,
-            overflow: 'visible',
+            overflow: "visible",
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
           },
         }}
       />
-      <div className='btn_post'>
-        <button className='btn_add' onClick={() => setOpen((prev) => !prev)}>
-          <AddIcon className='btn_style' />
+      <div className="btn_post">
+        <button className="btn_add" onClick={() => setOpen((prev) => !prev)}>
+          <AddIcon className="btn_style" />
         </button>
       </div>
       <SwipeableDrawer
         container={container}
-        anchor='bottom'
+        anchor="bottom"
         open={open}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
@@ -119,8 +125,8 @@ const SubjectDrawer = ({ window }: ISuggestionDrawer) => {
           sx={{
             px: 3,
             pb: 2,
-            height: '100%',
-            overflow: 'auto',
+            height: "100%",
+            overflow: "auto",
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
           }}
@@ -128,30 +134,42 @@ const SubjectDrawer = ({ window }: ISuggestionDrawer) => {
           <Puller />
           {/* <PostForm /> */}
           <div>
-            <form className='form_container' onSubmit={handlePost}>
-              <div className='modal_heading'>
-                <span className='modal_h_style modal_color_w'>Post Review</span>
-                <input type='submit' value='Post' className='modal_h_style modal_color_b'></input>
+            <form className="form_container" onSubmit={handlePost}>
+              <div className="modal_heading">
+                <span className="modal_h_style modal_color_w">Post Review</span>
+                <input
+                  type="submit"
+                  value="Post"
+                  className="modal_h_style modal_color_b"
+                ></input>
               </div>
-              <div className='modal_hr'></div>
-              <div className='form_style form'>
-                <Stack spacing={2} sx={{ width: 340 }}>
+              <div className="modal_hr"></div>
+              <div className="form_style form">
+                <Stack spacing={2} sx={{ width: "100%" }}>
                   <Autocomplete
-                    id='subjectId'
+                    id="subjectId"
                     freeSolo
-                    options={subject.map((option) => option.subjectId + ' ' + option.name)}
-                    renderInput={(params) => (
-                      <TextField {...params} label='Subject id' sx={{ label: { color: '#707070' } }} />
+                    options={subject.map(
+                      (option) => option.subjectId + " " + option.name
                     )}
-                    onChange={(_, data) => (data ? setSubjectId(data.substr(0, 8)) : setSubjectId(''))}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Subject id"
+                        sx={{ label: { color: "#707070" } }}
+                      />
+                    )}
+                    onChange={(_, data) =>
+                      data ? setSubjectId(data.substr(0, 8)) : setSubjectId("")
+                    }
                   />
                 </Stack>
                 <textarea
                   onChange={(e) => setTextSubjectReview(e.target.value)}
-                  id='textSubjectReview'
+                  id="textSubjectReview"
                   value={textSubjectReview}
-                  placeholder='Review Detail'
-                  className='form_detail'
+                  placeholder="Review Detail"
+                  className="form_detail"
                   rows={5}
                 />
               </div>

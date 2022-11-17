@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-wrap: break-word; /**/
   }
   .review_post{
     width: 300px;
