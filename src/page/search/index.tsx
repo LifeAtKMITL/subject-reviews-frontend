@@ -65,10 +65,11 @@ const Search = () => {
           );
           let tempLK = dataLike.find((element) => element.reviewId === e._id);
           console.log("temp", tempBK);
+          const newDateSearch = new Date(e.date);
           return (
             <BlogPost
               reviewer_name={e.username}
-              date={e.date}
+              date={newDateSearch.toUTCString()}
               description={e.textSubjectReview}
               subject_id_name={e.subjectId + " " + e.subjectName}
               reviewer_image={e.imagePath}

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import axios from 'utils/axios';
-import './index.css';
+import React, { useState, useEffect } from "react";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import axios from "utils/axios";
+import "./index.css";
 
 interface BolgPost {
   reviewer_name: string;
@@ -41,13 +41,17 @@ const Like = ({ userId }: ILike) => {
 
   return (
     <div>
-      <button onClick={handleLikeClick} className='review_btn_like'>
+      <button onClick={handleLikeClick} className="review_btn_like">
         {isLikeActive ? (
-          <ThumbUpAltIcon className='review_btn_likeon' />
+          <ThumbUpAltIcon className="review_btn_likeon" />
         ) : (
-          <ThumbUpOffAltIcon className='review_btn_likeoff' />
+          <ThumbUpOffAltIcon className="review_btn_likeoff" />
         )}
-        <div className={isLikeActive ? 'review_numlikeon' : 'review_numlikeoff'}>{likeCount}</div>
+        <div
+          className={isLikeActive ? "review_numlikeon" : "review_numlikeoff"}
+        >
+          {likeCount}
+        </div>
       </button>
     </div>
   );
@@ -65,66 +69,93 @@ const BolgPostBookmark = ({
 }: BolgPost) => {
   const [isReadmore, setReadmore] = useState(false);
   const [isBookmark, setBookmark] = useState(false);
+  const [isOnLike, setOnLike] = useState(false);
+  const [numlike, setnumlike] = useState(0);
   const btn_readmore = () => {
     setReadmore((prevState) => !prevState);
   };
   const btn_delBookmark = () => {
     setBookmark((prevState) => !prevState);
     axios
-      .delete('/blogreview/bookmark', {
+      .delete("/blogreview/bookmark", {
         data: {
           reviewId: id,
         },
       })
-      .then((res) => console.log('Posting data', res))
+      .then((res) => console.log("Posting data", res))
       .catch((err) => console.log(err));
     setBookmark(false);
   };
+
+  useEffect(() => {
+    setOnLike(isLike);
+  }, []);
+
+  useEffect(() => {
+    setnumlike(Number(likeCount));
+  }, []);
+
   const btn_like = () => {
-    axios.put('/blogreview/like', { reviewId: id });
+    if (isLike) {
+      axios.put("/blogreview/like", { reviewId: id });
+      setOnLike((prevState) => !prevState);
+      setnumlike(numlike - 1);
+    } else {
+      axios.put("/blogreview/like", { reviewId: id });
+      setOnLike((prevState) => !prevState);
+      setnumlike(numlike + 1);
+    }
   };
   return (
-    <div className='review_box'>
-      <div className='review_post'>
-        <div className='review_reviewer'>
-          <img className='review_img' src={reviewer_image}></img>
-          <div className='review_name_date'>
-            <div className='review_font_name'>{reviewer_name}</div>
-            <div className='review_font_date'>{date}</div>
+    <div className="review_box">
+      <div className="review_post">
+        <div className="review_reviewer">
+          <img className="review_img" src={reviewer_image}></img>
+          <div className="review_name_date">
+            <div className="review_font_name">{reviewer_name}</div>
+            <div className="review_font_date">{date}</div>
           </div>
           <div>
-            <button onClick={btn_delBookmark} className='review_btn_bookmark'>
+            <button onClick={btn_delBookmark} className="review_btn_bookmark">
               {isBookmark ? (
-                <BookmarkBorderIcon className='review_color_bookmark' />
+                <BookmarkBorderIcon className="review_color_bookmark" />
               ) : (
-                <BookmarkIcon className='review_color_bookmark' />
+                <BookmarkIcon className="review_color_bookmark" />
               )}
             </button>
           </div>
-          <div className='review_box_like'>
+          <div className="review_box_like">
             <div>
               <div>
-                <button onClick={btn_like} className='review_btn_like'>
-                  {isLike ? (
-                    <ThumbUpAltIcon className='review_btn_likeon' />
+                <button onClick={btn_like} className="review_btn_like">
+                  {isOnLike ? (
+                    <ThumbUpAltIcon className="review_btn_likeon" />
                   ) : (
-                    <ThumbUpOffAltIcon className='review_btn_likeoff' />
+                    <ThumbUpOffAltIcon className="review_btn_likeoff" />
                   )}
-                  <div className={isLike ? 'review_numlikeon' : 'review_numlikeoff'}>{likeCount}</div>
+                  <div
+                    className={
+                      isOnLike ? "review_numlikeon" : "review_numlikeoff"
+                    }
+                  >
+                    {Number(numlike)}
+                  </div>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className='review_font_subject'>{subject_id_name}</div>
-        <div className='review_font_description'>
-          {description && <p>{isReadmore ? description : description.substring(0, 200)}</p>}
+        <div className="review_font_subject">{subject_id_name}</div>
+        <div className="review_font_description">
+          {description && (
+            <p>{isReadmore ? description : description.substring(0, 200)}</p>
+          )}
           {description && (
             <div>
-              {' '}
+              {" "}
               {description.length > 200 && (
-                <button className='review_btn_readmore' onClick={btn_readmore}>
-                  {isReadmore ? 'Read Less ' : '...Read More'}
+                <button className="review_btn_readmore" onClick={btn_readmore}>
+                  {isReadmore ? "Read Less " : "...Read More"}
                 </button>
               )}
             </div>
