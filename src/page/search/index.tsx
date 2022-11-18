@@ -35,9 +35,9 @@ const Search = () => {
       setData(res.reverse());
       setDataBookmark(response.bookmarkedReviews);
       setDataLike(response.likedReviews);
+      setLoadingSearch(false);
     };
     getPost();
-    setLoadingSearch(false);
     // console.log(dataBookmark);
   }, []);
 
