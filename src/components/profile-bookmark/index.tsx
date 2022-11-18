@@ -12,6 +12,7 @@ const ProfileBookmark = () => {
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]); //
+  const [isLoadingProfile, setLoadingProfile] = useState(false);
   let r: any; //
   let chck = true; //
   const apiBookmark = "/blogreview/bookmarkedreview";
@@ -19,6 +20,7 @@ const ProfileBookmark = () => {
   const apiAllPost =
     "https://life-at-kmitl-backend-production.up.railway.app/blogreview"; //
   useEffect(() => {
+    setLoadingProfile(true);
     const getBookmarks = async () => {
       const { data: res } = await axios.get(apiBookmark);
       const { data: response } = await axios.get(apiUser);
@@ -27,10 +29,11 @@ const ProfileBookmark = () => {
       setData(resp); //
       setDataBookmark(response.bookmarkedReviews);
       setDataLike(response.likedReviews);
+      setLoadingProfile(false);
     };
     getBookmarks();
-    setLoading(false);
-  }, [bookmarks]);
+  }, []);
+  // bookmarks
 
   const [isAll, setAll] = useState(false);
   const toggleBtn = () => {
@@ -63,53 +66,62 @@ const ProfileBookmark = () => {
           </button>
         </div>
         <div>
-          {isAll ? (
-            <div>
-              {data.map((e) => {
-                let tempBK1 = dataBookmark.find(
-                  (element) => element.reviewId === e._id
-                );
-                let tempLK1 = dataLike.find(
-                  (element) => element.reviewId === e._id
-                );
-                const newDate = new Date(e.date);
-                return (
-                  tempBK1 && (
-                    <BolgPostBookmark
-                      reviewer_name={e.username}
-                      date={newDate.toUTCString()}
-                      description={e.textSubjectReview}
-                      subject_id_name={e.subjectId + " " + e.subjectName}
-                      reviewer_image={e.imagePath}
-                      id={e._id}
-                      likeCount={e.likeCount}
-                      isBookMark={tempBK1}
-                      isLike={tempLK1}
-                    />
-                  )
-                ); //
-              })}
+          {isLoadingProfile ? (
+            <div className="loading">
+              <div className="loader"></div>
             </div>
           ) : (
             <div>
-              {bookmarks.reverse().length > 0 ? (
-                <BolgPostBookmark
-                  reviewer_name={r.username}
-                  date={r.date}
-                  description={r.textSubjectReview}
-                  subject_id_name={r.subjectId + " " + r.subjectName}
-                  reviewer_image={r.imagePath}
-                  id={r._id}
-                  likeCount={r.likeCount}
-                  isBookMark={dataBookmark.find(
-                    (element) => element.reviewId === r._id
-                  )}
-                  isLike={dataLike.find(
-                    (element) => element.reviewId === r._id
-                  )}
-                /> //
+              {" "}
+              {isAll ? (
+                <div>
+                  {data.map((e) => {
+                    let tempBK1 = dataBookmark.find(
+                      (element) => element.reviewId === e._id
+                    );
+                    let tempLK1 = dataLike.find(
+                      (element) => element.reviewId === e._id
+                    );
+                    const newDate = new Date(e.date);
+                    return (
+                      tempBK1 && (
+                        <BolgPostBookmark
+                          reviewer_name={e.username}
+                          date={newDate.toUTCString()}
+                          description={e.textSubjectReview}
+                          subject_id_name={e.subjectId + " " + e.subjectName}
+                          reviewer_image={e.imagePath}
+                          id={e._id}
+                          likeCount={e.likeCount}
+                          isBookMark={tempBK1}
+                          isLike={tempLK1}
+                        />
+                      )
+                    ); //
+                  })}
+                </div>
               ) : (
-                <div>No Bookmark</div>
+                <div>
+                  {bookmarks.reverse().length > 0 ? (
+                    <BolgPostBookmark
+                      reviewer_name={r.username}
+                      date={r.date}
+                      description={r.textSubjectReview}
+                      subject_id_name={r.subjectId + " " + r.subjectName}
+                      reviewer_image={r.imagePath}
+                      id={r._id}
+                      likeCount={r.likeCount}
+                      isBookMark={dataBookmark.find(
+                        (element) => element.reviewId === r._id
+                      )}
+                      isLike={dataLike.find(
+                        (element) => element.reviewId === r._id
+                      )}
+                    /> //
+                  ) : (
+                    <div>No Bookmark</div>
+                  )}
+                </div>
               )}
             </div>
           )}
