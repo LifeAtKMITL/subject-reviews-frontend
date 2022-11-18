@@ -18,44 +18,6 @@ interface BolgPost {
   isBookMark: boolean;
 }
 
-interface ILike {
-  userId: string;
-}
-
-const Like = ({ userId }: ILike) => {
-  const [likeCount, setLikeCount] = useState(5);
-  const [isLikeActive, setActiveBtn] = useState(false);
-
-  const handleLikeClick = () => {
-    console.log(userId);
-    if (!isLikeActive) {
-      setLikeCount(likeCount + 1);
-      setActiveBtn((prevState) => !prevState);
-      return;
-    } else {
-      setLikeCount(likeCount - 1);
-      setActiveBtn((prevState) => !prevState);
-      return;
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={handleLikeClick} className="review_btn_like">
-        {isLikeActive ? (
-          <ThumbUpAltIcon className="review_btn_likeon" />
-        ) : (
-          <ThumbUpOffAltIcon className="review_btn_likeoff" />
-        )}
-        <div
-          className={isLikeActive ? "review_numlikeon" : "review_numlikeoff"}
-        >
-          {likeCount}
-        </div>
-      </button>
-    </div>
-  );
-};
 const BolgPostBookmark = ({
   reviewer_name,
   date,
@@ -110,9 +72,9 @@ const BolgPostBookmark = ({
           <div>
             <button onClick={btn_delBookmark} className="review_btn_bookmark">
               {isBook ? (
-                <BookmarkBorderIcon className="review_color_bookmark" />
-              ) : (
                 <BookmarkIcon className="review_color_bookmark" />
+              ) : (
+                <BookmarkBorderIcon className="review_color_bookmark" />
               )}
             </button>
           </div>
