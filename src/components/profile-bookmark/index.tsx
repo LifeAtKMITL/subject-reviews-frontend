@@ -7,7 +7,6 @@ import axios from "utils/axios";
 import "./profilebookmark.css";
 
 const ProfileBookmark = () => {
-  const [loading, setLoading] = useState(true);
   const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
@@ -50,7 +49,6 @@ const ProfileBookmark = () => {
       }
     });
   } //
-  if (loading) return <div>...loading</div>;
 
   return (
     <div className="bookmark_container">
@@ -72,7 +70,6 @@ const ProfileBookmark = () => {
             </div>
           ) : (
             <div>
-              {" "}
               {isAll ? (
                 <div>
                   {data.map((e) => {
