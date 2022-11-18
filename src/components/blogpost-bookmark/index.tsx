@@ -5,6 +5,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import axios from "utils/axios";
 import "./index.css";
+import ProfileBookmark from "components/profile-bookmark";
 
 interface BolgPost {
   reviewer_name: string;
@@ -38,6 +39,7 @@ const BolgPostBookmark = ({
   };
   const btn_delBookmark = () => {
     setBook((prevState) => !prevState);
+    gg;
     axios
       .delete("/blogreview/bookmark", {
         data: {
@@ -59,6 +61,10 @@ const BolgPostBookmark = ({
       setnumlike(numlike + 1);
       axios.put("/blogreview/like", { reviewId: id });
     }
+  };
+
+  const gg = () => {
+    <ProfileBookmark delBookmark={btn_delBookmark} />;
   };
   return (
     <div className="review_box">
