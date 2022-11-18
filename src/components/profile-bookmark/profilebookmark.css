@@ -44,7 +44,7 @@
 .loading{
     display: flex;
     justify-content: center;
-    margin-top: 30%;
+    /* margin-top: 30%; */
 }
 .loader {
     position: relative;
