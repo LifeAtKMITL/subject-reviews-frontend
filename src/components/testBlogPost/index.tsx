@@ -39,44 +39,33 @@ const BlogPost: React.FC<BlogPost> = ({
   isLike,
 }) => {
   const [isReadmore, setReadmore] = useState(false);
-  const [isOnLike, setOnLike] = useState(false);
-  const [isBook, setBook] = useState(false);
-  const [numlike, setnumlike] = useState(0);
+  const [isOnLike, setOnLike] = useState(isLike);
+  const [isBook, setBook] = useState(isBookMark);
+  const [numlike, setnumlike] = useState(Number(likeCount));
   const btn_readmore = () => {
     setReadmore((prevState) => !prevState);
   };
-  useEffect(() => {
-    setBook(isBookMark);
-  }, []);
+
   const btn_bookmark = () => {
-    setBook(false);
-    if (isBookMark) {
+    setBook((prevState) => !prevState);
+    if (isBook) {
       axios.delete("/blogreview/bookmark", {
         data: {
           reviewId: id,
         },
       });
-    } else setBook(true);
-    axios.put("/blogreview/bookmark", { reviewId: id });
+    } else axios.put("/blogreview/bookmark", { reviewId: id });
   };
 
-  useEffect(() => {
-    setOnLike(isLike);
-  }, []);
-
-  useEffect(() => {
-    setnumlike(Number(likeCount));
-  }, []);
-
   const btn_like = () => {
-    if (isLike) {
-      axios.put("/blogreview/like", { reviewId: id });
+    if (isOnLike) {
       setOnLike((prevState) => !prevState);
       setnumlike(numlike - 1);
-    } else {
       axios.put("/blogreview/like", { reviewId: id });
+    } else {
       setOnLike((prevState) => !prevState);
       setnumlike(numlike + 1);
+      axios.put("/blogreview/like", { reviewId: id });
     }
   };
 
