@@ -6,11 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "utils/axios";
 import "./profilebookmark.css";
 
-interface ProfileBookmark {
-  delBookmark: any;
-}
-
-const ProfileBookmark = ({ delBookmark }: ProfileBookmark) => {
+const ProfileBookmark = () => {
   const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
@@ -36,8 +32,8 @@ const ProfileBookmark = ({ delBookmark }: ProfileBookmark) => {
       setLoadingProfile(false);
     };
     getBookmarks();
-  }, [delBookmark]);
-  // bookmarks
+  }, [bookmarks]);
+  // bookmarkss
 
   const [isAll, setAll] = useState(false);
   const toggleBtn = () => {
