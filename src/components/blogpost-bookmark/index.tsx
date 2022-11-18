@@ -68,14 +68,14 @@ const BolgPostBookmark = ({
   isLike,
 }: BolgPost) => {
   const [isReadmore, setReadmore] = useState(false);
-  const [isBookmark, setBookmark] = useState(false);
-  const [isOnLike, setOnLike] = useState(false);
-  const [numlike, setnumlike] = useState(0);
+  const [isBook, setBook] = useState(isBookMark);
+  const [isOnLike, setOnLike] = useState(isLike);
+  const [numlike, setnumlike] = useState(Number(likeCount));
   const btn_readmore = () => {
     setReadmore((prevState) => !prevState);
   };
   const btn_delBookmark = () => {
-    setBookmark((prevState) => !prevState);
+    setBook((prevState) => !prevState);
     axios
       .delete("/blogreview/bookmark", {
         data: {
@@ -84,26 +84,18 @@ const BolgPostBookmark = ({
       })
       .then((res) => console.log("Posting data", res))
       .catch((err) => console.log(err));
-    setBookmark(false);
+    setBook(false);
   };
 
-  useEffect(() => {
-    setOnLike(isLike);
-  }, []);
-
-  useEffect(() => {
-    setnumlike(Number(likeCount));
-  }, []);
-
   const btn_like = () => {
-    if (isLike) {
-      axios.put("/blogreview/like", { reviewId: id });
+    if (isOnLike) {
       setOnLike((prevState) => !prevState);
       setnumlike(numlike - 1);
-    } else {
       axios.put("/blogreview/like", { reviewId: id });
+    } else {
       setOnLike((prevState) => !prevState);
       setnumlike(numlike + 1);
+      axios.put("/blogreview/like", { reviewId: id });
     }
   };
   return (
@@ -117,7 +109,7 @@ const BolgPostBookmark = ({
           </div>
           <div>
             <button onClick={btn_delBookmark} className="review_btn_bookmark">
-              {isBookmark ? (
+              {isBook ? (
                 <BookmarkBorderIcon className="review_color_bookmark" />
               ) : (
                 <BookmarkIcon className="review_color_bookmark" />
