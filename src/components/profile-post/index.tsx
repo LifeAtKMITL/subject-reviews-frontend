@@ -22,24 +22,24 @@ interface IProfilePost {
 
 const ProfilePost = () => {
   const [isActive, setIsActive] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<IProfilePost[]>([]);
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
   const apiPostProfile = "/blogreview/profile";
   const apiUser = "/blogreview/userreviews";
+  const [isLoadingProfile, setLoadingProfile] = useState(false);
   useEffect(() => {
+    setLoadingProfile(true);
     const getPostProfile = async () => {
       const { data: res } = await axios.get(apiPostProfile);
       const { data: response } = await axios.get(apiUser);
       setData(res.reverse());
       setDataBookmark(response.bookmarkedReviews);
       setDataLike(response.likedReviews);
+      setLoadingProfile(false);
     };
     getPostProfile();
-
-    setLoading(false);
-  }, [data]);
+  }, []);
   useEffect(() => {
     console.log(data);
   }, [data]);
@@ -47,12 +47,7 @@ const ProfilePost = () => {
   const handleAllButton = () => {
     setIsActive(!isActive);
   };
-  if (loading)
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+
   // const newDatePost0 = new Date(data[0].date);
   return (
     <div className="Post__container">
@@ -68,51 +63,62 @@ const ProfilePost = () => {
         </div>
       </div>
       <div className="reviewpost__blog">
-        {isActive ? (
-          <div>
-            {data.map((e) => {
-              let tempBK1 = dataBookmark.find(
-                (element) => element.reviewId === e._id
-              );
-              let tempLK1 = dataLike.find(
-                (element) => element.reviewId === e._id
-              );
-              const newDatePost = new Date(e.date);
-              return (
-                <BlogPost
-                  reviewer_name={e.username}
-                  date={newDatePost.toUTCString()}
-                  description={e.textSubjectReview}
-                  subject_id_name={e.subjectId + " " + e.subjectName}
-                  reviewer_image={e.imagePath}
-                  id={e._id}
-                  likeCount={e.likeCount}
-                  isBookMark={tempBK1}
-                  isLike={tempLK1}
-                />
-              );
-            })}
+        {isLoadingProfile ? (
+          <div className="loading">
+            <div className="loader"></div>
           </div>
         ) : (
           <div>
-            {data.length > 0 ? (
-              <BlogPost
-                reviewer_name={data[0].username}
-                date={data[0].date}
-                description={data[0].textSubjectReview}
-                subject_id_name={data[0].subjectId + " " + data[0].subjectName}
-                reviewer_image={data[0].imagePath}
-                id={data[0]._id}
-                likeCount={data[0].likeCount}
-                isBookMark={dataBookmark.find(
-                  (element) => element.reviewId === data[0]._id
-                )}
-                isLike={dataLike.find(
-                  (element) => element.reviewId === data[0]._id
-                )}
-              />
+            {" "}
+            {isActive ? (
+              <div>
+                {data.map((e) => {
+                  let tempBK1 = dataBookmark.find(
+                    (element) => element.reviewId === e._id
+                  );
+                  let tempLK1 = dataLike.find(
+                    (element) => element.reviewId === e._id
+                  );
+                  const newDatePost = new Date(e.date);
+                  return (
+                    <BlogPost
+                      reviewer_name={e.username}
+                      date={newDatePost.toUTCString()}
+                      description={e.textSubjectReview}
+                      subject_id_name={e.subjectId + " " + e.subjectName}
+                      reviewer_image={e.imagePath}
+                      id={e._id}
+                      likeCount={e.likeCount}
+                      isBookMark={tempBK1}
+                      isLike={tempLK1}
+                    />
+                  );
+                })}
+              </div>
             ) : (
-              <div>No Post</div>
+              <div>
+                {data.length > 0 ? (
+                  <BlogPost
+                    reviewer_name={data[0].username}
+                    date={data[0].date}
+                    description={data[0].textSubjectReview}
+                    subject_id_name={
+                      data[0].subjectId + " " + data[0].subjectName
+                    }
+                    reviewer_image={data[0].imagePath}
+                    id={data[0]._id}
+                    likeCount={data[0].likeCount}
+                    isBookMark={dataBookmark.find(
+                      (element) => element.reviewId === data[0]._id
+                    )}
+                    isLike={dataLike.find(
+                      (element) => element.reviewId === data[0]._id
+                    )}
+                  />
+                ) : (
+                  <div>No Post</div>
+                )}
+              </div>
             )}
           </div>
         )}
