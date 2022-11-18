@@ -53,7 +53,7 @@ const ProfilePost = () => {
         <Loading />
       </div>
     );
-  const newDatePost0 = new Date(data[0].date);
+  // const newDatePost0 = new Date(data[0].date);
   return (
     <div className="Post__container">
       <div className="header__postProfile">
@@ -98,7 +98,7 @@ const ProfilePost = () => {
             {data.length > 0 ? (
               <BlogPost
                 reviewer_name={data[0].username}
-                date={newDatePost0.toUTCString()}
+                date={data[0].date}
                 description={data[0].textSubjectReview}
                 subject_id_name={data[0].subjectId + " " + data[0].subjectName}
                 reviewer_image={data[0].imagePath}
