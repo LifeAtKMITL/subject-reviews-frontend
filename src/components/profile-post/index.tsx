@@ -40,9 +40,9 @@ const ProfilePost = () => {
     };
     getPostProfile();
   }, []);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   const handleAllButton = () => {
     setIsActive(!isActive);
