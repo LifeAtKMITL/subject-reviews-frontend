@@ -32,7 +32,7 @@ const ProfileBookmark = () => {
       setLoadingProfile(false);
     };
     getBookmarks();
-  }, [bookmarks]);
+  }, [dataBookmark]);
   // bookmarkss
 
   const [isAll, setAll] = useState(false);
