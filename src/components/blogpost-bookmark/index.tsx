@@ -41,7 +41,7 @@ const BolgPostBookmark = ({
   };
   const btn_delBookmark = () => {
     setBook((prevState) => !prevState);
-    getPost;
+    getPost();
     axios
       .delete("/blogreview/bookmark", {
         data: {
