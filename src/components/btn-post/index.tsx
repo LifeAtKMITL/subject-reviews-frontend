@@ -59,9 +59,9 @@ const SubjectDrawer = ({ window, getPost }: ISuggestionDrawer) => {
           .post("/blogreview", { subjectId, textSubjectReview })
           .then((res) => console.log("Posting data", res))
           .catch((err) => console.log(err));
+        alert("Post สำเร็จ");
         setOpen(false);
         getPost();
-        alert("Post สำเร็จ");
         setSubjectId("");
         setTextSubjectReview("");
       } catch (error) {
