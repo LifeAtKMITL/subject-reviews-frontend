@@ -39,9 +39,9 @@ const BolgPostBookmark = ({
   const btn_readmore = () => {
     setReadmore((prevState) => !prevState);
   };
-  const btn_delBookmark = () => {
+  const btn_delBookmark = async () => {
     setBook((prevState) => !prevState);
-    axios
+    await axios
       .delete("/blogreview/bookmark", {
         data: {
           reviewId: id,
@@ -50,7 +50,6 @@ const BolgPostBookmark = ({
       .then((res) => console.log("Posting data", res))
       .catch((err) => console.log(err));
     getPost();
-    setBook(false);
   };
 
   const btn_like = () => {
