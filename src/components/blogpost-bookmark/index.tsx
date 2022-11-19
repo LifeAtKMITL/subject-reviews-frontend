@@ -52,15 +52,14 @@ const BolgPostBookmark = ({
     getPost();
   };
 
-  const btn_like = () => {
-    if (isOnLike) {
-      setOnLike((prevState) => !prevState);
-      setnumlike(numlike - 1);
-      axios.put("/blogreview/like", { reviewId: id });
-    } else {
-      setOnLike((prevState) => !prevState);
+  const btn_like = async () => {
+    await axios.put("/blogreview/like", { reviewId: id });
+    if (!isOnLike) {
+      setOnLike(true);
       setnumlike(numlike + 1);
-      axios.put("/blogreview/like", { reviewId: id });
+    } else {
+      setOnLike(false);
+      setnumlike(numlike - 1);
     }
   };
 
