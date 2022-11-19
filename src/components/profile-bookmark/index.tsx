@@ -74,7 +74,7 @@ const ProfileBookmark = () => {
             </div>
           ) : (
             <div>
-              {isAll ? (
+              {isAll && data.length > 0 ? (
                 <div>
                   {data.map((e) => {
                     let tempBK1 = dataBookmark.find(
@@ -104,32 +104,28 @@ const ProfileBookmark = () => {
                 </div>
               ) : (
                 <div>
-                  {bookmarks.length == 0 ? (
-                    <div>No Bookmark</div>
-                  ) : (
-                    <div>
-                      {bookmarks.reverse().length > 0 ? (
-                        <BolgPostBookmark
-                          reviewer_name={r.username}
-                          date={r.date}
-                          description={r.textSubjectReview}
-                          subject_id_name={r.subjectId + " " + r.subjectName}
-                          reviewer_image={r.imagePath}
-                          id={r._id}
-                          likeCount={r.likeCount}
-                          isBookMark={dataBookmark.find(
-                            (element) => element.reviewId === r._id
-                          )}
-                          isLike={dataLike.find(
-                            (element) => element.reviewId === r._id
-                          )}
-                          getPost={getBookmarks}
-                        /> //
-                      ) : (
-                        <div>No Bookmark</div>
-                      )}
-                    </div>
-                  )}
+                  <div>
+                    {bookmarks.reverse().length > 0 ? (
+                      <BolgPostBookmark
+                        reviewer_name={r.username}
+                        date={r.date}
+                        description={r.textSubjectReview}
+                        subject_id_name={r.subjectId + " " + r.subjectName}
+                        reviewer_image={r.imagePath}
+                        id={r._id}
+                        likeCount={r.likeCount}
+                        isBookMark={dataBookmark.find(
+                          (element) => element.reviewId === r._id
+                        )}
+                        isLike={dataLike.find(
+                          (element) => element.reviewId === r._id
+                        )}
+                        getPost={getBookmarks}
+                      /> //
+                    ) : (
+                      <div>No Bookmark</div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
