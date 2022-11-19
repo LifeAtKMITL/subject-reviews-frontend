@@ -15,6 +15,7 @@ import { Value } from "sass";
 
 interface ISuggestionDrawer {
   window?: () => Window;
+  getPost: () => void;
 }
 
 const Root = styled("div")(() => ({
@@ -39,7 +40,7 @@ const Puller = styled(Box)(() => ({
 
 const drawerBleeding = 56;
 
-const SubjectDrawer = ({ window }: ISuggestionDrawer) => {
+const SubjectDrawer = ({ window, getPost }: ISuggestionDrawer) => {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -62,6 +63,7 @@ const SubjectDrawer = ({ window }: ISuggestionDrawer) => {
         setSubjectId("");
         setTextSubjectReview("");
         setOpen(false);
+        getPost();
       } catch (error) {
         alert("Subject Id not found.");
         return null;
