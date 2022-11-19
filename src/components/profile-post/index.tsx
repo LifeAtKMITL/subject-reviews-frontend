@@ -27,6 +27,8 @@ const ProfilePost = () => {
   const [dataLike, setDataLike] = useState<any[]>([]);
   const apiPostProfile = "/blogreview/profile";
   const apiUser = "/blogreview/userreviews";
+  const apiBookmark = "/blogreview/bookmarkedreview";
+  const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [isLoadingProfile, setLoadingProfile] = useState(false);
   useEffect(() => {
     setLoadingProfile(true);
@@ -43,6 +45,19 @@ const ProfilePost = () => {
   // useEffect(() => {
   //   console.log(data);
   // }, [data]);
+
+  const getBookmarks = async () => {
+    setLoadingProfile(true);
+    const { data: res } = await axios.get(apiBookmark);
+    const { data: response } = await axios.get(apiUser);
+    setBookmarks(res);
+    setDataBookmark(response.bookmarkedReviews);
+    setDataLike(response.likedReviews);
+    setLoadingProfile(false);
+  };
+  useEffect(() => {
+    getBookmarks();
+  }, []);
 
   const handleAllButton = () => {
     setIsActive(!isActive);
@@ -91,6 +106,7 @@ const ProfilePost = () => {
                       likeCount={e.likeCount}
                       isBookMark={tempBK1}
                       isLike={tempLK1}
+                      getPost={getBookmarks}
                     />
                   );
                 })}
@@ -114,6 +130,7 @@ const ProfilePost = () => {
                     isLike={dataLike.find(
                       (element) => element.reviewId === data[0]._id
                     )}
+                    getPost={getBookmarks}
                   />
                 ) : (
                   <div>No Post</div>
