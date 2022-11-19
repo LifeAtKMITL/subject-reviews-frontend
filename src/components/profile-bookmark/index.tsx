@@ -6,11 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "utils/axios";
 import "./profilebookmark.css";
 
-interface ProfileBookmark {
-  getPost: () => void;
-}
-
-const ProfileBookmark = ({ getPost }: ProfileBookmark) => {
+const ProfileBookmark = () => {
   const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
@@ -23,20 +19,20 @@ const ProfileBookmark = ({ getPost }: ProfileBookmark) => {
   const apiAllPost =
     "https://life-at-kmitl-backend-production.up.railway.app/blogreview"; //
 
-  useEffect(() => {
+  const getBookmarks = async () => {
     setLoadingProfile(true);
-    const getBookmarks = async () => {
-      const { data: res } = await axios.get(apiBookmark);
-      const { data: response } = await axios.get(apiUser);
-      const { data: resp } = await axios.get(apiAllPost); //
-      setBookmarks(res);
-      setData(resp); //
-      setDataBookmark(response.bookmarkedReviews);
-      setDataLike(response.likedReviews);
-      setLoadingProfile(false);
-    };
+    const { data: res } = await axios.get(apiBookmark);
+    const { data: response } = await axios.get(apiUser);
+    const { data: resp } = await axios.get(apiAllPost); //
+    setBookmarks(res);
+    setData(resp); //
+    setDataBookmark(response.bookmarkedReviews);
+    setDataLike(response.likedReviews);
+    setLoadingProfile(false);
+  };
+  useEffect(() => {
     getBookmarks();
-  }, [getPost()]);
+  }, []);
   // bookmarkss
 
   const [isAll, setAll] = useState(false);
@@ -97,6 +93,7 @@ const ProfileBookmark = ({ getPost }: ProfileBookmark) => {
                           likeCount={e.likeCount}
                           isBookMark={tempBK1}
                           isLike={tempLK1}
+                          getPost={getBookmarks}
                         />
                       )
                     ); //
@@ -119,6 +116,7 @@ const ProfileBookmark = ({ getPost }: ProfileBookmark) => {
                       isLike={dataLike.find(
                         (element) => element.reviewId === r._id
                       )}
+                      getPost={getBookmarks}
                     /> //
                   ) : (
                     <div>No Bookmark</div>
