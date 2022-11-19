@@ -132,7 +132,7 @@ const Home = () => {
               />
             );
           })}
-          <SwipeableEdgeDrawer />
+          <SwipeableEdgeDrawer getPost={getPost} />
         </div>
       )}
     </div>
