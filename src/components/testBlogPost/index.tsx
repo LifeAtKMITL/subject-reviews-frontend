@@ -18,7 +18,7 @@ interface BlogPost {
   isBookMark: boolean;
   // userId_Like: string;
   // objId: string;
-  getPost: () => void;
+  // getPost: () => void;
 }
 
 interface ILike {
@@ -38,7 +38,6 @@ const BlogPost: React.FC<BlogPost> = ({
   likeCount,
   isBookMark,
   isLike,
-  getPost,
 }) => {
   const [isReadmore, setReadmore] = useState(false);
   const [isOnLike, setOnLike] = useState(isLike);
@@ -50,7 +49,6 @@ const BlogPost: React.FC<BlogPost> = ({
 
   const btn_bookmark = () => {
     setBook((prevState) => !prevState);
-    getPost();
     if (isBook) {
       axios.delete("/blogreview/bookmark", {
         data: {
