@@ -17,6 +17,7 @@ interface BolgPost {
   likeCount: string;
   isLike: boolean;
   isBookMark: boolean;
+  getPost: () => void;
 }
 
 const BolgPostBookmark = ({
@@ -29,6 +30,7 @@ const BolgPostBookmark = ({
   likeCount,
   isBookMark,
   isLike,
+  getPost,
 }: BolgPost) => {
   const [isReadmore, setReadmore] = useState(false);
   const [isBook, setBook] = useState(isBookMark);

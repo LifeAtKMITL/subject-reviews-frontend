@@ -19,19 +19,19 @@ const ProfileBookmark = () => {
   const apiAllPost =
     "https://life-at-kmitl-backend-production.up.railway.app/blogreview"; //
 
+  const getBookmarks = async () => {
+    const { data: res } = await axios.get(apiBookmark);
+    const { data: response } = await axios.get(apiUser);
+    const { data: resp } = await axios.get(apiAllPost); //
+    setBookmarks(res);
+    setData(resp); //
+    setDataBookmark(response.bookmarkedReviews);
+    setDataLike(response.likedReviews);
+  };
   useEffect(() => {
     setLoadingProfile(true);
-    const getBookmarks = async () => {
-      const { data: res } = await axios.get(apiBookmark);
-      const { data: response } = await axios.get(apiUser);
-      const { data: resp } = await axios.get(apiAllPost); //
-      setBookmarks(res);
-      setData(resp); //
-      setDataBookmark(response.bookmarkedReviews);
-      setDataLike(response.likedReviews);
-      setLoadingProfile(false);
-    };
     getBookmarks();
+    setLoadingProfile(false);
   }, []);
   // bookmarkss
 
@@ -93,6 +93,7 @@ const ProfileBookmark = () => {
                           likeCount={e.likeCount}
                           isBookMark={tempBK1}
                           isLike={tempLK1}
+                          getPost={getBookmarks}
                         />
                       )
                     ); //
@@ -115,6 +116,7 @@ const ProfileBookmark = () => {
                       isLike={dataLike.find(
                         (element) => element.reviewId === r._id
                       )}
+                      getPost={getBookmarks}
                     /> //
                   ) : (
                     <div>No Bookmark</div>
