@@ -55,12 +55,12 @@ const SubjectDrawer = ({ window, getPost }: ISuggestionDrawer) => {
     if (subjectId.trim() != "" && textSubjectReview.trim() != "") {
       try {
         e.preventDefault();
+        alert("Post สำเร็จ");
+        setOpen(false);
         await axios
           .post("/blogreview", { subjectId, textSubjectReview })
           .then((res) => console.log("Posting data", res))
           .catch((err) => console.log(err));
-        alert("Post สำเร็จ");
-        setOpen(false);
         getPost();
         setSubjectId("");
         setTextSubjectReview("");
