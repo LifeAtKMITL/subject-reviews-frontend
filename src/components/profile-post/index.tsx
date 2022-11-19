@@ -7,6 +7,7 @@ import BolgPost from "components/blogpost";
 import Loading from "components/loading";
 import BlogPost from "components/testBlogPost";
 import axios from "utils/axios";
+import BolgPostUser from "components/blogpost-post";
 
 interface IProfilePost {
   _id: string;
@@ -83,7 +84,7 @@ const ProfilePost = () => {
                   );
                   const newDatePost = new Date(e.date);
                   return (
-                    <BlogPost
+                    <BolgPostUser
                       reviewer_name={e.username}
                       date={newDatePost.toUTCString()}
                       description={e.textSubjectReview}
@@ -91,7 +92,6 @@ const ProfilePost = () => {
                       reviewer_image={e.imagePath}
                       id={e._id}
                       likeCount={e.likeCount}
-                      isBookMark={tempBK1}
                       isLike={tempLK1}
                     />
                   );
@@ -100,7 +100,7 @@ const ProfilePost = () => {
             ) : (
               <div>
                 {data.length > 0 ? (
-                  <BlogPost
+                  <BolgPostUser
                     reviewer_name={data[0].username}
                     date={data[0].date}
                     description={data[0].textSubjectReview}
@@ -110,9 +110,6 @@ const ProfilePost = () => {
                     reviewer_image={data[0].imagePath}
                     id={data[0]._id}
                     likeCount={data[0].likeCount}
-                    isBookMark={dataBookmark.find(
-                      (element) => element.reviewId === data[0]._id
-                    )}
                     isLike={dataLike.find(
                       (element) => element.reviewId === data[0]._id
                     )}
