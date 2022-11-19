@@ -17,7 +17,7 @@ interface BolgPost {
   likeCount: string;
   isLike: boolean;
   isBookMark: boolean;
-  getPost: () => void;
+  // getPost: () => void;
 }
 
 const BolgPostBookmark = ({
@@ -30,7 +30,6 @@ const BolgPostBookmark = ({
   likeCount,
   isBookMark,
   isLike,
-  getPost,
 }: BolgPost) => {
   const [isReadmore, setReadmore] = useState(false);
   const [isBook, setBook] = useState(isBookMark);
@@ -40,8 +39,8 @@ const BolgPostBookmark = ({
     setReadmore((prevState) => !prevState);
   };
   const btn_delBookmark = () => {
+    <ProfileBookmark getPost={btn_delBookmark} />;
     setBook((prevState) => !prevState);
-    getPost();
     axios
       .delete("/blogreview/bookmark", {
         data: {
