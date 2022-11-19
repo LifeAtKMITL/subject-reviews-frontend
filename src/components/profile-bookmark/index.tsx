@@ -33,7 +33,10 @@ const ProfileBookmark = () => {
   useEffect(() => {
     getBookmarks();
   }, []);
-  // bookmarkss
+
+  useEffect(() => {
+    bookmarks;
+  }, [bookmarks]);
 
   const [isAll, setAll] = useState(false);
   const toggleBtn = () => {
