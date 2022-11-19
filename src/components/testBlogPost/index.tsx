@@ -58,15 +58,15 @@ const BlogPost: React.FC<BlogPost> = ({
     } else axios.put("/blogreview/bookmark", { reviewId: id });
   };
 
-  const btn_like = () => {
+  const btn_like = async () => {
     if (isOnLike) {
       setOnLike((prevState) => !prevState);
-      setnumlike((prevState) => prevState - 1);
+      setnumlike(numlike - 1);
     } else {
       setOnLike((prevState) => !prevState);
-      setnumlike((prevState) => prevState + 1);
+      setnumlike(numlike + 1);
     }
-    axios.put("/blogreview/like", { reviewId: id });
+    await axios.put("/blogreview/like", { reviewId: id });
   };
 
   return (
