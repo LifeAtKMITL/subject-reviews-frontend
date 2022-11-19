@@ -51,11 +51,11 @@ const SubjectDrawer = ({ window, getPost }: ISuggestionDrawer) => {
     window !== undefined ? () => window().document.body : undefined;
   const [subjectId, setSubjectId] = useState("");
   const [textSubjectReview, setTextSubjectReview] = useState("");
-  const handlePost = (e: React.FormEvent<HTMLFormElement>) => {
+  const handlePost = async (e: React.FormEvent<HTMLFormElement>) => {
     if (subjectId.trim() != "" && textSubjectReview.trim() != "") {
       try {
         e.preventDefault();
-        axios
+        await axios
           .post("/blogreview", { subjectId, textSubjectReview })
           .then((res) => console.log("Posting data", res))
           .catch((err) => console.log(err));
