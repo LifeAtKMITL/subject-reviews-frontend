@@ -21,31 +21,26 @@ const Home = () => {
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const options = texts.filter((option) => !selected.includes(option));
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
   const apiUser = "/blogreview/userreviews";
   const apiAllPost = "/blogreview";
-  useEffect(() => {
-    const getPost = async () => {
-      const { data: res } = await axios.get(apiAllPost);
-      const { data: response } = await axios.get(apiUser);
-      setData(res.reverse());
-      setDataBookmark(response.bookmarkedReviews);
-      setDataLike(response.likedReviews);
-    };
-    getPost();
-    // console.log(dataBookmark);
-    setLoading(false);
-  }, [data]);
 
-  if (loading)
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+  const getPost = async () => {
+    setLoading(true);
+    const { data: res } = await axios.get(apiAllPost);
+    const { data: response } = await axios.get(apiUser);
+    setData(res.reverse());
+    setDataBookmark(response.bookmarkedReviews);
+    setDataLike(response.likedReviews);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getPost();
+  }, []);
 
   const handleButtonDropdown = () => {
     setIsActive(!isActive);
@@ -111,29 +106,35 @@ const Home = () => {
           <SearchButton />
         </div>
       </div>
-      <div className="m_blogpost">
-        {r.map((e) => {
-          // let tempBK = dataBookmark.find((element) => element.reviewId === e._id);
-          // let tempLK = dataLike.find((element) => element.reviewId === e._id);
-          const newDate = new Date(e.date); //-------------------------------
-          return (
-            <BlogPost
-              reviewer_name={e.username}
-              date={newDate.toUTCString()}
-              description={e.textSubjectReview}
-              subject_id_name={e.subjectId + " " + e.subjectName}
-              reviewer_image={e.imagePath}
-              id={e._id}
-              likeCount={e.likeCount}
-              isBookMark={dataBookmark.find(
-                (element) => element.reviewId === e._id
-              )}
-              isLike={dataLike.find((element) => element.reviewId === e._id)}
-            />
-          );
-        })}
-        <SwipeableEdgeDrawer />
-      </div>
+      {isLoading ? (
+        <div className="loading">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        <div className="m_blogpost">
+          {r.map((e) => {
+            // let tempBK = dataBookmark.find((element) => element.reviewId === e._id);
+            // let tempLK = dataLike.find((element) => element.reviewId === e._id);
+            const newDate = new Date(e.date); //-------------------------------
+            return (
+              <BlogPost
+                reviewer_name={e.username}
+                date={newDate.toUTCString()}
+                description={e.textSubjectReview}
+                subject_id_name={e.subjectId + " " + e.subjectName}
+                reviewer_image={e.imagePath}
+                id={e._id}
+                likeCount={e.likeCount}
+                isBookMark={dataBookmark.find(
+                  (element) => element.reviewId === e._id
+                )}
+                isLike={dataLike.find((element) => element.reviewId === e._id)}
+              />
+            );
+          })}
+          <SwipeableEdgeDrawer />
+        </div>
+      )}
     </div>
   );
 };
