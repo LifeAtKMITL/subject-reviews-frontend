@@ -59,11 +59,11 @@ const SubjectDrawer = ({ window, getPost }: ISuggestionDrawer) => {
           .post("/blogreview", { subjectId, textSubjectReview })
           .then((res) => console.log("Posting data", res))
           .catch((err) => console.log(err));
+        setOpen(false);
         getPost();
         alert("Post สำเร็จ");
         setSubjectId("");
         setTextSubjectReview("");
-        setOpen(false);
       } catch (error) {
         alert("Subject Id not found.");
         return null;
