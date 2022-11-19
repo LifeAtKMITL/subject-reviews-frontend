@@ -60,18 +60,13 @@ const BlogPost: React.FC<BlogPost> = ({
   const btn_like = () => {
     if (isOnLike) {
       setOnLike((prevState) => !prevState);
-      setnumlike(numlike - 1);
-      axios.put("/blogreview/like", { reviewId: id });
+      setnumlike((prevState) => prevState - 1);
     } else {
       setOnLike((prevState) => !prevState);
-      setnumlike(numlike + 1);
-      axios.put("/blogreview/like", { reviewId: id });
+      setnumlike((prevState) => prevState + 1);
     }
+    axios.put("/blogreview/like", { reviewId: id });
   };
-
-  useEffect(() => {
-    setOnLike(isLike);
-  }, [btn_like]);
 
   return (
     <div className="review_box">
