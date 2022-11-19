@@ -41,6 +41,9 @@ const Home = () => {
   useEffect(() => {
     getPost();
   }, []);
+  useEffect(() => {
+    data;
+  }, [getPost]);
 
   const handleButtonDropdown = () => {
     setIsActive(!isActive);

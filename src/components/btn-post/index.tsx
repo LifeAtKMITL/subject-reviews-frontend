@@ -53,13 +53,13 @@ const SubjectDrawer = ({ window, getPost }: ISuggestionDrawer) => {
   const [textSubjectReview, setTextSubjectReview] = useState("");
   const handlePost = (e: React.FormEvent<HTMLFormElement>) => {
     if (subjectId.trim() != "" && textSubjectReview.trim() != "") {
-      getPost();
       try {
         e.preventDefault();
         axios
           .post("/blogreview", { subjectId, textSubjectReview })
           .then((res) => console.log("Posting data", res))
           .catch((err) => console.log(err));
+        getPost();
         alert("Post สำเร็จ");
         setSubjectId("");
         setTextSubjectReview("");
