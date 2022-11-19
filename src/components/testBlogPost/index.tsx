@@ -60,7 +60,7 @@ const BlogPost: React.FC<BlogPost> = ({
 
   const btn_like = async () => {
     await axios.put("/blogreview/like", { reviewId: id });
-    if (!isOnLike && numlike != 0) {
+    if (!isOnLike) {
       setOnLike(true);
       setnumlike(numlike + 1);
     } else {
