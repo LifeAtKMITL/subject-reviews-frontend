@@ -60,6 +60,7 @@ const Home = () => {
   let review = data;
   let r = data;
   if (selected.length > 0) {
+    getPost();
     r = [];
     if (selected.includes("Sci/Math")) {
       const filterSubject = review.filter((review) =>
@@ -92,7 +93,6 @@ const Home = () => {
       r.push(...filterSubject);
     }
   }
-
   return (
     <div className="home_bg">
       <NavBar />
