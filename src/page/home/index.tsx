@@ -10,6 +10,7 @@ import "./home.scss";
 import BolgPostBookmark from "components/blogpost-bookmark";
 import BlogPost from "components/testBlogPost";
 import axios from "utils/axios";
+import Search from "page/search";
 
 interface IHome {
   id: string;

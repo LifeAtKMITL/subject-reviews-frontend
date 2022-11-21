@@ -24,16 +24,12 @@ const Search = () => {
   const [data, setData] = useState<any[]>([]);
   const [dataBookmark, setDataBookmark] = useState<any[]>([]);
   const [dataLike, setDataLike] = useState<any[]>([]);
-  const [isLoadingSearch, setLoadingSearch] = useState(true);
+  const [isLoadingSearch, setLoadingSearch] = useState(false);
   const apiUser = "/blogreview/userreviews";
   const apiAllPost = "/blogreview";
 
-  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-    setTextInput(e.currentTarget.value);
-    console.log(textInput);
-  };
   useEffect(() => {
-    // setLoadingSearch(true);
+    setLoadingSearch(true);
     const getPost = async () => {
       const { data: res } = await axios.get(apiAllPost);
       const { data: response } = await axios.get(apiUser);
@@ -44,7 +40,12 @@ const Search = () => {
     };
     getPost();
     // console.log(dataBookmark);
-  }, [handleInput]);
+  }, []);
+
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    setTextInput(e.currentTarget.value);
+    console.log(textInput);
+  };
 
   let review = data;
   if (textInput) {
