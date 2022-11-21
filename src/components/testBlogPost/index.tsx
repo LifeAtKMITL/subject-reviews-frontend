@@ -63,9 +63,15 @@ const BlogPost: React.FC<BlogPost> = ({
     if (!isOnLike) {
       setOnLike(true);
       setnumlike(numlike + 1);
+      useEffect(() => {
+        setOnLike(isLike);
+      }, []);
     } else {
       setOnLike(false);
       setnumlike(numlike - 1);
+      useEffect(() => {
+        setOnLike(isLike);
+      }, []);
     }
   };
 
@@ -91,14 +97,14 @@ const BlogPost: React.FC<BlogPost> = ({
             <div>
               <div>
                 <button onClick={btn_like} className="review_btn_like">
-                  {isLike ? (
+                  {isOnLike ? (
                     <ThumbUpAltIcon className="review_btn_likeon" />
                   ) : (
                     <ThumbUpOffAltIcon className="review_btn_likeoff" />
                   )}
                   <div
                     className={
-                      isLike ? "review_numlikeon" : "review_numlikeoff"
+                      isOnLike ? "review_numlikeon" : "review_numlikeoff"
                     }
                   >
                     {Number(numlike)}
