@@ -29,7 +29,7 @@ const Home = () => {
   const apiAllPost = "/blogreview";
 
   const getPost = async () => {
-    // setLoading(true);
+    setLoading(true);
     const { data: res } = await axios.get(apiAllPost);
     const { data: response } = await axios.get(apiUser);
     setData(res.reverse());
@@ -40,7 +40,7 @@ const Home = () => {
 
   useEffect(() => {
     getPost();
-  }, [data]);
+  }, []);
 
   useEffect(() => {
     data;
