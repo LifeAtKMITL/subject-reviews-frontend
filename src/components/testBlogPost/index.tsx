@@ -63,15 +63,9 @@ const BlogPost: React.FC<BlogPost> = ({
     if (!isOnLike) {
       setOnLike(true);
       setnumlike(numlike + 1);
-      useEffect(() => {
-        setOnLike(isLike);
-      }, []);
     } else {
       setOnLike(false);
       setnumlike(numlike - 1);
-      useEffect(() => {
-        setOnLike(isLike);
-      }, []);
     }
   };
 
