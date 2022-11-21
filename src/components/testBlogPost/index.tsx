@@ -91,14 +91,14 @@ const BlogPost: React.FC<BlogPost> = ({
             <div>
               <div>
                 <button onClick={btn_like} className="review_btn_like">
-                  {isOnLike ? (
+                  {isLike ? (
                     <ThumbUpAltIcon className="review_btn_likeon" />
                   ) : (
                     <ThumbUpOffAltIcon className="review_btn_likeoff" />
                   )}
                   <div
                     className={
-                      isOnLike ? "review_numlikeon" : "review_numlikeoff"
+                      isLike ? "review_numlikeon" : "review_numlikeoff"
                     }
                   >
                     {Number(numlike)}
