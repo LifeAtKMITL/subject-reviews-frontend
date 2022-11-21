@@ -69,10 +69,6 @@ const BlogPost: React.FC<BlogPost> = ({
     }
   };
 
-  useEffect(() => {
-    setOnLike(isLike);
-  }, [btn_like]);
-
   return (
     <div className="review_box">
       <div className="review_post">
